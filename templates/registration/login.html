@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Авторизация</h1>
+    {% if form.errors %}
+        <div class="alert-danger">
+            <p class="p-1">Не правильный логин или пароль</p>
+        </div>
+    {% endif %}
+    {% if user.is_authenticated %}
+        <div class="alert-danger">
+            <p class="p-1">Вый уже авторизованы <a href="{% url 'logout' %}">Выйти</a></p>
+        </div>
+    {% else %}
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>{{ form.username.label }}</td>
+                    <td>{{ form.username }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.password.label }}</td>
+                    <td>{{ form.password }}</td>
+                </tr>
+            </table>
+        <input type="submit" class="btn-primary btn" value="Войти">
+        </form>
+
+    {% endif %}
+{% endblock %}

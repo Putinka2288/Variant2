@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Мои заявки</h1>
+    {% if orders %}
+    <div class="container row" style="gap: 5rem">
+        {% for item in orders %}
+            <div class="card col-3" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Дата заявки {{ item.date }}</h5>
+                    <p class="card-text">Статус: {{ item.status_verbose }}</p>
+                </div>
+                <ul class="list-group list-group-flush align-content-center">
+                    <li class="list-group-item">Согласованная цена: {{ item.price_done }}</li>
+                    <li class="list-group-item">Описание заявки: {{ item.description }}</li>
+                    <li class="list-group-item">Адрес помещения: {{ item.address }}</li>
+                    <li class="list-group-item">Категория: {{ item.category.name }}</li>
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div>
+        <p class="p-1">Заявок нету</p>
+    </div>
+    {% endif %}
+{% endblock %}
